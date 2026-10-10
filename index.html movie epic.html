@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<title>Movie Epic</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--r:#e50914;--bg:#141414}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#fff;font-family:"Helvetica Neue",Arial,system-ui,sans-serif;line-height:1.45;overflow-x:hidden}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) 4% 12px;background:linear-gradient(#000c,#0000);transition:background .3s}
+header.s{background:#141414}
+.b{color:var(--r);font-weight:900;font-size:24px;letter-spacing:2px;text-shadow:0 2px 8px #000}
+#q{width:46%;max-width:300px;padding:9px 14px;border-radius:4px;border:1px solid #fff5;background:#000a;color:#fff;font-size:15px;outline:0}
+#q:focus{border-color:#fff}
+#hero{position:relative;height:78vh;min-height:430px;background-size:cover;background-position:center top;display:flex;align-items:flex-end}
+#hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 3%,#0000 45%),linear-gradient(90deg,#000c 0%,#0000 65%)}
+.hc{position:relative;z-index:2;padding:0 4% 90px;max-width:620px}
+.hc h1{font-size:clamp(28px,7vw,54px);line-height:1.1;text-shadow:0 3px 12px #000;margin-bottom:8px}
+.mt{color:#46d369;font-weight:700;font-size:14px}.mt span{color:#ddd;font-weight:400;margin-left:10px}
+.hc p,.ov{color:#e5e5e5;font-size:15px;margin:10px 0 16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border:0;border-radius:4px;font-size:16px;font-weight:700;cursor:pointer;margin:0 8px 8px 0;background:#6d6d6eb3;color:#fff}
+.btn.w{background:#fff;color:#000}
+.btn:active{opacity:.7}
+section.rw{padding:0 4%;margin-bottom:26px;position:relative;z-index:3}
+#rows,#my{margin-top:-70px;position:relative;z-index:3}
+section.rw h2{font-size:19px;margin-bottom:10px;font-weight:700}
+.sc{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 0 14px;scrollbar-width:none}
+.sc::-webkit-scrollbar{display:none}
+.c{flex:none;width:128px;aspect-ratio:2/3;border-radius:5px;overflow:hidden;position:relative;cursor:pointer;scroll-snap-align:start;background:linear-gradient(135deg,#3a1c71,#b0365a);display:flex;align-items:center;justify-content:center;font-size:44px;transition:transform .25s}
+.c img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.c .t{position:absolute;left:0;right:0;bottom:0;padding:22px 6px 6px;font-size:12px;font-weight:700;background:linear-gradient(#0000,#000d);opacity:0;transition:.2s}
+@media (hover:hover){.c:hover{transform:scale(1.12);z-index:5;box-shadow:0 8px 24px #000}.c:hover .t{opacity:1}}
+@media (min-width:700px){.c{width:175px}.hc{padding-bottom:110px}}
+.c .rt{position:absolute;top:6px;right:6px;background:#000b;color:#f5c518;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px}
+#res{padding:90px 4% 30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+#res .c{width:100%}
+#res .em{grid-column:1/-1;color:#aaa;text-align:center;padding:40px}
+#m{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:center;justify-content:center;padding:0}
+#m.o{display:flex}
+.sh{position:relative;width:100%;max-width:820px;max-height:100%;overflow:auto;background:#181818;border-radius:10px;box-shadow:0 10px 60px #000}
+.tp{aspect-ratio:16/9;background-size:cover;background-position:center;position:relative}
+.tp iframe{width:100%;height:100%;border:0}
+.tp:after{content:"";position:absolute;inset:auto 0 0;height:50%;background:linear-gradient(0deg,#181818,#0000);pointer-events:none}
+.bd{padding:6px 5% 28px}
+.bd h2{font-size:26px;margin-bottom:4px}
+.x{position:absolute;top:10px;right:10px;z-index:5;width:38px;height:38px;border-radius:50%;border:0;background:#181818;color:#fff;font-size:18px;cursor:pointer}
+.ov{-webkit-line-clamp:unset;display:block}
+.pl{display:inline-block;background:#333;padding:4px 12px;border-radius:14px;font-size:13px;margin:0 6px 6px 0}
+.mu{color:#999;font-size:14px;margin:8px 0}.mu b{color:#ccc}
+footer{padding:30px 4% calc(34px + env(safe-area-inset-bottom,0px));text-align:center;color:#777;font-size:12px;border-top:1px solid #2a2a2a}
+footer b{color:#ddd;font-size:15px;display:block;margin-bottom:6px}
+.err{margin:90px 4% 0;padding:12px;background:#2a1010;border:1px solid var(--r);border-radius:6px;font-size:14px;position:relative;z-index:9}
+</style>
+</head>
+<body>
+<header id="h"><div class="b">MOVIE EPIC</div><input id="q" placeholder="Titles, people, genres" enterkeyhint="search"></header>
+<div id="hero"></div>
+<div id="my"></div>
+<div id="rows"></div>
+<div id="res" hidden></div>
+<footer><b>Owner: Sir Syed Zaid</b>This product uses the TMDB API but is not endorsed or certified by TMDB.<br>Movie data and images courtesy of TMDB.</footer>
+<div id="m"></div>
+<script>
+var KEY="c9146ece6f91fd56ff836def6a1bbf1a",A="https://api.themoviedb.org/3",I="https://image.tmdb.org/t/p/";
+var $=function(i){return document.getElementById(i)},M={},ml=[];
+try{ml=JSON.parse(localStorage.getItem("ml")||"[]")}catch(e){}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function tm(p,x){return fetch(A+p+"?api_key="+KEY+"&language=en-US"+(x||"")).then(function(r){if(!r.ok)throw 0;return r.json()})}
+var D="&sort_by=popularity.desc&include_adult=false&with_genres=";
+var ROWS=[["Trending Now","/trending/movie/week",""],["Now Playing","/movie/now_playing",""],["Coming Soon","/movie/upcoming",""],["Top Rated","/movie/top_rated",""],["Popular","/movie/popular",""],["Hindi Movies","/discover/movie","&sort_by=popularity.desc&with_original_language=hi"],["Action","/discover/movie",D+"28"],["Sci-Fi","/discover/movie",D+"878"],["Comedy","/discover/movie",D+"35"],["Horror","/discover/movie",D+"27"],["Thriller","/discover/movie",D+"53"],["Romance","/discover/movie",D+"10749"],["Animation","/discover/movie",D+"16"],["Crime","/discover/movie",D+"80"],["Drama","/discover/movie",D+"18"]];
+var F=[["Inception",2010,8.8,"🌀","A thief who steals secrets through dreams is given one impossible task."],["The Dark Knight",2008,9.0,"🦇","Batman faces the Joker in Gotham."],["Interstellar",2014,8.7,"🚀","Explorers travel through a wormhole to save humanity."],["The Matrix",1999,8.7,"💊","A hacker discovers reality is a simulation."],["Spirited Away",2001,8.6,"🐉","A girl wanders into a world of spirits."],["Parasite",2019,8.5,"🏠","A poor family schemes its way into a wealthy home."],["3 Idiots",2009,8.4,"🎓","Three friends navigate college pressure."],["Avengers: Endgame",2019,8.4,"🦸","The Avengers assemble once more."]];
+function card(m){M[m.id]=m;var r=m.vote_average?'<span class="rt">★ '+Number(m.vote_average).toFixed(1)+'</span>':'';
+return '<div class="c" data-id="'+m.id+'">'+(m.poster_path?'<img loading="lazy" alt="" src="'+I+'w342'+m.poster_path+'">':esc(m.e||"🎬"))+r+'<div class="t">'+esc(m.title)+'</div></div>'}
+function row(t,items,id){var s=document.createElement("section");s.className="rw";s.id=id||"";s.innerHTML='<h2>'+esc(t)+'</h2><div class="sc">'+items.map(card).join("")+'</div>';return s}
+function hero(m){var h=$("hero");if(m.backdrop_path)h.style.backgroundImage="url("+I+"w1280"+m.backdrop_path+")";else h.style.background="linear-gradient(135deg,#3a1c71,#b0365a)";
+h.innerHTML='<div class="hc"><h1>'+esc(m.title)+'</h1><div class="mt">★ '+Number(m.vote_average||0).toFixed(1)+'<span>'+esc((m.release_date||"").slice(0,4))+'</span></div><p>'+esc(m.overview)+'</p><button class="btn w" data-a="p" data-id="'+m.id+'">▶ Play Trailer</button><button class="btn" data-a="i" data-id="'+m.id+'">ⓘ More Info</button></div>'}
+function myRow(){var e=$("my");e.innerHTML="";if(ml.length){ml.forEach(function(m){M[m.id]=m});e.appendChild(row("My List",ml,"mylist"))}}
+function offline(){var it=F.map(function(f,i){return{id:-(i+1),title:f[0],release_date:f[1]+"",vote_average:f[2],e:f[3],overview:f[4]}});
+hero(it[0]);$("rows").innerHTML="";$("rows").appendChild(row("Offline Preview",it));
+var d=document.createElement("div");d.className="err";d.textContent="Could not reach TMDB. Check your internet connection and reload to see live movies.";$("rows").prepend(d)}
+function init(){myRow();var first=true;
+ROWS.forEach(function(r){var ph=document.createElement("div");$("rows").appendChild(ph);
+tm(r[1],r[2]).then(function(d){var it=d.results.filter(function(m){return m.poster_path});if(!it.length)return;
+if(first){first=false;var hs=it.filter(function(m){return m.backdrop_path&&m.overview});hero(hs[Math.floor(Math.random()*Math.min(5,hs.length))]||it[0])}
+ph.replaceWith(row(r[0],it))}).catch(function(){if(first){first=false;$("rows").innerHTML="";offline()}})})}
+function save(){try{localStorage.setItem("ml",JSON.stringify(ml))}catch(e){}myRow()}
+function inList(id){return ml.some(function(m){return m.id==id})}
+function toggle(id){var m=M[id];if(!m)return;if(inList(id))ml=ml.filter(function(x){return x.id!=id});else ml.unshift({id:m.id,title:m.title,poster_path:m.poster_path,vote_average:m.vote_average,e:m.e,overview:m.overview,release_date:m.release_date});save()}
+function close_(){$("m").classList.remove("o");$("m").innerHTML="";document.body.style.overflow=""}
+function frame(h){$("m").innerHTML='<div class="sh"><button class="x" data-a="x">✕</button>'+h+'</div>';$("m").classList.add("o");document.body.style.overflow="hidden"}
+function lb(id){return inList(id)?"✓ In My List":"+ My List"}
+function open_(id,play){var m=M[id]||{};
+if(id<0){frame('<div class="tp" style="display:flex;align-items:center;justify-content:center;font-size:80px;background:linear-gradient(135deg,#3a1c71,#b0365a)">'+esc(m.e)+'</div><div class="bd"><h2>'+esc(m.title)+'</h2><div class="mt">★ '+m.vote_average+'<span>'+esc(m.release_date)+'</span></div><p class="ov">'+esc(m.overview)+'</p></div>');return}
+frame('<div class="tp"></div><div class="bd"><p class="mu">Loading...</p></div>');
+tm("/movie/"+id,"&append_to_response=videos,credits,watch/providers").then(function(d){M[id]=Object.assign(M[id]||{},{id:d.id,title:d.title,poster_path:d.poster_path,vote_average:d.vote_average,release_date:d.release_date,overview:d.overview});
+var v=(d.videos.results.filter(function(a){return a.site=="YouTube"&&a.type=="Trailer"})[0]||d.videos.results.filter(function(a){return a.site=="YouTube"})[0]||{}).key;
+var rg=(navigator.language.split("-")[1]||"US").toUpperCase(),W=d["watch/providers"].results,w=W[rg],lbl=rg;if(!w){w=W.US||{};lbl="US"}
+var pv=[].concat(w.flatrate||[],w.rent||[],w.buy||[]).map(function(a){return a.provider_name}).filter(function(n,i,a){return a.indexOf(n)==i}).slice(0,10);
+var top=v?'<iframe src="https://www.youtube.com/embed/'+esc(v)+'?rel=0'+(play?'&autoplay=1':'')+'" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe>':'';
+frame('<div class="tp" style="'+(d.backdrop_path&&!v?'background-image:url('+I+'w780'+d.backdrop_path+')':'background:#000')+'">'+top+'</div><div class="bd"><h2>'+esc(d.title)+'</h2><div class="mt">★ '+Number(d.vote_average).toFixed(1)+'<span>'+esc((d.release_date||"").slice(0,4))+' • '+esc(d.runtime||"?")+' min</span></div><div style="margin-top:12px"><button class="btn w" data-a="l" data-id="'+d.id+'">'+lb(d.id)+'</button></div><p class="ov">'+esc(d.overview)+'</p><p class="mu"><b>Genres:</b> '+esc(d.genres.map(function(g){return g.name}).join(", "))+'</p><p class="mu"><b>Cast:</b> '+esc(d.credits.cast.slice(0,8).map(function(c){return c.name}).join(", "))+'</p><p class="mu"><b>Available on ('+esc(lbl)+'):</b></p>'+(pv.length?pv.map(function(n){return '<span class="pl">'+esc(n)+'</span>'}).join(""):'<span class="mu">No platform info listed yet.</span>')+'<p class="mu"><a style="color:#8ab4ff" target="_blank" rel="noopener" href="https://www.justwatch.com/'+(rg.toLowerCase())+'/search?q='+encodeURIComponent(d.title)+'">Check on JustWatch</a></p></div>')}).catch(function(){frame('<div class="bd"><p class="mu" style="margin-top:30px">Could not load details. Check your internet.</p></div>')})}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-a]"),c=e.target.closest(".c");
+if(b){var a=b.dataset.a,id=b.dataset.id;if(a=="x")close_();else if(a=="p")open_(id,true);else if(a=="i")open_(id);else if(a=="l"){toggle(id);b.textContent=lb(id)}}
+else if(c)open_(c.dataset.id);else if(e.target.id=="m")close_()});
+window.addEventListener("scroll",function(){$("h").classList.toggle("s",scrollY>40)});
+var T;$("q").oninput=function(){clearTimeout(T);var q=this.value.trim();T=setTimeout(function(){
+var on=q.length>1;$("res").hidden=!on;$("hero").hidden=on;$("rows").hidden=on;$("my").hidden=on;
+if(!on)return;$("res").innerHTML='<div class="em">Searching...</div>';
+tm("/search/movie","&query="+encodeURIComponent(q)+"&include_adult=false").then(function(d){var it=d.results.filter(function(m){return m.poster_path});$("res").innerHTML=it.length?it.map(card).join(""):'<div class="em">No results for "'+esc(q)+'"</div>'}).catch(function(){$("res").innerHTML='<div class="em">Search needs an internet connection.</div>'})},400)};
+init();
+</script>
+</body>
+</html>
