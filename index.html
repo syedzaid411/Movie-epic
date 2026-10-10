@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#141414">
 <title>Movie Epic</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--r:#e50914;--bg:#141414}
@@ -110,6 +113,7 @@ var on=q.length>1;$("res").hidden=!on;$("hero").hidden=on;$("rows").hidden=on;$(
 if(!on)return;$("res").innerHTML='<div class="em">Searching...</div>';
 tm("/search/movie","&query="+encodeURIComponent(q)+"&include_adult=false").then(function(d){var it=d.results.filter(function(m){return m.poster_path});$("res").innerHTML=it.length?it.map(card).join(""):'<div class="em">No results for "'+esc(q)+'"</div>'}).catch(function(){$("res").innerHTML='<div class="em">Search needs an internet connection.</div>'})},400)};
 init();
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
 </script>
 </body>
 </html>
